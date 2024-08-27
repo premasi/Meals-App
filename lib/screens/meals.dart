@@ -3,9 +3,9 @@ import 'package:meals_app/models/meals_models.dart';
 import 'package:meals_app/widgets/meals_item.dart';
 
 class Meals extends StatelessWidget {
-  const Meals({super.key, required this.category, required this.listMeals});
+  const Meals({super.key, this.category, required this.listMeals});
 
-  final String category;
+  final String? category;
   final List<MealsModels> listMeals;
 
   @override
@@ -32,11 +32,15 @@ class Meals extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(category),
-      ),
-      body: content,
-    );
+    if (category == null) {
+      return content;
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(category!),
+        ),
+        body: content,
+      );
+    }
   }
 }
