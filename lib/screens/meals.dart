@@ -3,16 +3,24 @@ import 'package:meals_app/models/meals_models.dart';
 import 'package:meals_app/widgets/meals_item.dart';
 
 class Meals extends StatelessWidget {
-  const Meals({super.key, this.category, required this.listMeals});
+  const Meals(
+      {super.key,
+      this.category,
+      required this.listMeals,
+      required this.onToggleFavorite});
 
   final String? category;
   final List<MealsModels> listMeals;
+  final void Function(MealsModels meals) onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
       itemCount: listMeals.length,
-      itemBuilder: (ctx, index) => MealsItem(meals: listMeals[index]),
+      itemBuilder: (ctx, index) => MealsItem(
+        meals: listMeals[index],
+        onToggleFavorite: onToggleFavorite,
+      ),
     );
 
     if (listMeals.isEmpty) {
