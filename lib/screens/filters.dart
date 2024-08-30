@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 enum Filter {
@@ -10,7 +8,9 @@ enum Filter {
 }
 
 class Filters extends StatefulWidget {
-  const Filters({super.key});
+  const Filters({super.key, required this.currentFilter});
+
+  final Map<Filter, bool> currentFilter;
 
   @override
   State<StatefulWidget> createState() {
@@ -23,6 +23,15 @@ class _FiltersState extends State<Filters> {
   var _lactoseFreeFilter = false;
   var _vegetarianFreeFilter = false;
   var _veganFreeFilter = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _glutenFreeFilter = widget.currentFilter[Filter.glutenFree]!;
+    _lactoseFreeFilter = widget.currentFilter[Filter.lactoseFree]!;
+    _vegetarianFreeFilter = widget.currentFilter[Filter.vegetarianFree]!;
+    _veganFreeFilter = widget.currentFilter[Filter.veganFree]!;
+  }
 
   @override
   Widget build(BuildContext context) {
