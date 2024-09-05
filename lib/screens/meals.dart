@@ -3,15 +3,10 @@ import 'package:meals_app/models/meals_models.dart';
 import 'package:meals_app/widgets/meals_item.dart';
 
 class Meals extends StatelessWidget {
-  const Meals(
-      {super.key,
-      this.category,
-      required this.listMeals,
-      required this.onToggleFavorite});
+  const Meals({super.key, this.category, required this.listMeals});
 
   final String? category;
   final List<MealsModels> listMeals;
-  final void Function(MealsModels meals) onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +14,6 @@ class Meals extends StatelessWidget {
       itemCount: listMeals.length,
       itemBuilder: (ctx, index) => MealsItem(
         meals: listMeals[index],
-        onToggleFavorite: onToggleFavorite,
       ),
     );
 
