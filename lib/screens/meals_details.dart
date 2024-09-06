@@ -10,6 +10,8 @@ class MealsDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteMeals = ref.watch(favoriteMealsProvider);
+    final isFavorite = favoriteMeals.contains(meals);
     return Scaffold(
       appBar: AppBar(
         title: Text(meals.title),
@@ -29,7 +31,10 @@ class MealsDetails extends ConsumerWidget {
                   ),
                 );
               },
-              icon: const Icon(Icons.favorite))
+              icon: Icon(
+                Icons.favorite,
+                color: isFavorite ? Colors.red : Colors.white,
+              ))
         ],
       ),
       body: SingleChildScrollView(
