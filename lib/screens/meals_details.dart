@@ -35,13 +35,15 @@ class MealsDetails extends ConsumerWidget {
               duration: const Duration(milliseconds: 300),
               transitionBuilder: (child, animation) {
                 return RotationTransition(
-                  turns: animation,
+                  // turns: animation,
+                  turns: Tween(begin: 0.5, end: 1.0).animate(animation),
                   child: child,
                 );
               },
               child: Icon(
                 Icons.favorite,
                 color: isFavorite ? Colors.red : Colors.white,
+                key: ValueKey(isFavorite),
               ),
             ),
           )
@@ -50,11 +52,14 @@ class MealsDetails extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.network(
-              meals.imageUrl,
-              height: 300,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            Hero(
+              tag: meals.id,
+              child: Image.network(
+                meals.imageUrl,
+                height: 300,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(
               height: 16,
